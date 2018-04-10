@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Setting depth-blocking-ads</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link href="options.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <h1> Setting Depth-blocking-ads</h1>
+
+    <div>
+        <table width="100%">
+            <tr>
+                <td colspan="10" bgcolor="#fdf5e6">
+                    <dl>
+                        <dt>Switch</dt>
+                        <dd>
+                            <div class="swtit">Enable blocking</div>
+                            <div class="switch-container">
+
+                                <input id="blocking_switch" type="checkbox" class="switch" />
+                                <label for="blocking_switch"></label>
+                            </div>
+                        </dd>
+                        <dd>
+                            <div class="swtit">Disable xmlHttpRequest</div>
+                            <div class="switch-container">
+
+                                <input id="xmlhttprequest_switch" type="checkbox" class="switch" />
+                                <label for="xmlhttprequest_switch"></label>
+                            </div>
+                        </dd>
+
+                        <dd>
+                            <div class="swtit">Disable image</div>
+                            <div class="switch-container">
+
+                                <input id="image_switch" type="checkbox" class="switch" />
+                                <label for="image_switch"></label>
+                            </div>
+                        </dd>
+
+                        <dd>
+                            <div class="swtit">Enable Content filtering</div>
+                            <div class="switch-container">
+                                <input id="contentfilter_switch" type="checkbox" class="switch" />
+                                <label for="contentfilter_switch"></label>
+                            </div>
+                        </dd>
+                    </dl>
+
+                </td>
+            </tr>
+            <tr>
+                <td width="50%" valign="top" bgcolor="#fefef8">
+                    <h2>block URL path or domain</h2>
+                    <textarea id="adintercept_data_list" cols="60" rows="30"></textarea><br>
+                    <button class="button" id="savebt">Save</button><span id="status" class="status"></span>
+                    <div>
+                        <h3>README:</h3>
+                        <p>每行一个（One line per line）.<br>
+                            不区分大小写(not case sensitive).<br>
+                            可使用#注释(Comment using #).<br>
+                        </p>
+                        <h3>Sample:</h3>
+                        <p>
+                            www.domainName1.com<br>
+                            domainName2.com<br>
+                            /ads/*/sd
+                        </p>
+                    </div>
+                    <div>
+                        <h2>Test URL</h2>
+                        URL:<input id="test_url_text" type="text" style="width: 350px">
+                        <button id="testbt">Test</button>
+                        <p>
+                            <span id="test_status"></span>
+                        </p>
+                    </div>
+                </td>
+                <td valign="top" bgcolor="#fefef8">
+                    <div id="content_text">
+                        <h2>Content Filter rules</h2>
+                        <textarea id="adintercept_data_content" cols="60" rows="30"></textarea><br>
+                        <button class="button" id="savecontentbt">Save</button><span id="contentstatus" class="status"></span>
+                        <div>
+                            <h3>README:</h3>
+                            每行一个（One line per line）.<br>
+                                url`type$strReg~.....<br>
+                                其中`$~为插件预留字符,不能在后续使用.<br>
+                                url 为要过滤的页面url path or domain信息，也可以使用*匹配所有页面，支持使用正册
+                                <br>
+                                type 为替换的内容类型（obj、text、textad）；
+                                obj为页面dom对象，text为页面html内容<br>
+                                <br>
+                                type 为text时; <br>
+                            一种为常规模式，strReg 为要被拦截的内容，当type为obj时只能使用class=xxx或id=xxx；可使用正册匹配页面内容
+                                <br>
+
+                                第二种模式为: text$str1$str2$number<br>
+                            str1为第一次要查找的字符位置，找到str1后，再从str1字符的位置再继续查找str2字符的位置，
+                            找到str2字符后再从str2字符位置开始截取后面number位字符，
+                            根据截取到的字符串中提取id和class标签属性值，再根据标签属性（class和id）获取的html对象，并删除此对象。
+                                <br>
+                            <!--
+                                type 为textad时<br>
+                                    div>p>span^xxxxxxx^span>p>div
+                            <br>
+                            xxxxxxx为要查找的字符，^字符前后匹配的标签
+                            -->
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript" src="js/options.js"></script>
+</body>
+</html>

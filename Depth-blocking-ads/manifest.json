@@ -1,0 +1,49 @@
+{
+  "name": "Depth-blocking-ads",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Depth-blocking-ads，深度广告拦截",
+  "minimum_chrome_version": "23",
+  "background": {
+    "scripts": ["background.js"]
+    // "persistent": false
+    // persistent属性设置为true时，扩展在后台一直运行，若为false，按需运行
+  },
+  "browser_action": {
+    "default_icon": "icon_16.png",
+    "default_title": "Depth-blocking-ads"
+  },
+
+  // Chrome40以前的插件配置页写法
+  "options_page": "options.html",
+ /*
+  // 如果2个都写，新版Chrome只认后面这一个
+  // options_ui 为pop弹窗形式
+  "options_ui":
+  {
+    "page": "options.html",
+    // 添加一些默认的样式，推荐使用
+    "chrome_style": true
+  },
+*/
+  "icons": {
+    "16": "icon_16.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["js/jquery.min.js", "js/injectscript.js"]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest", // web请求
+    "webRequestBlocking", // 阻塞式web请求
+    "storage", // 插件本地存储
+    "http://*/*", // 可以通过executeScript或者insertCSS访问的网站
+    "https://*/*" // 可以通过executeScript或者insertCSS访问的网站
+  ]
+
+}

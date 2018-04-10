@@ -1,0 +1,125 @@
+body {
+    background-color: #f3f3ff;
+    margin: 0 auto;
+@box-shadow: 2 px 2 px 22 px #fff inset;
+    padding: 5px;
+    color: #555;
+    width: 90%;
+}
+
+.status {
+    margin-left: 20px;
+    color: green
+}
+
+table, td {
+    text-align: left
+}
+
+.f_green {
+    color: green
+}
+
+.f_red {
+    color: red
+}
+
+td {
+    padding: 0 8px;
+    margin: 8px
+}
+
+dt {
+    font-weight: bold;
+    padding: 6px 0
+}
+
+dd {
+    float: left;
+    padding: 18px 0;
+    margin: 0 16px;
+}
+
+.swtit {
+    float: left;
+}
+
+.switch-container {
+    padding-left: 6px;
+    height: 15px;
+    width: 30px;
+    float: left;
+}
+
+.switch {
+    display: none;
+}
+
+label {
+    display: block;
+    background-color: #EEEEEE;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+label:before {
+    content: '';
+    display: block;
+    border-radius: 25px;
+    height: 100%;
+    width: 15px;
+    background-color: white;
+    opacity: 1;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.08);
+    -webkit-transition: all 0.2s ease;
+}
+
+label:after {
+    position: relative;
+    top: -15px;
+    left: 15px;
+    content: '';
+    display: block;
+    border-radius: 25px;
+    height: 100%;
+    width: 15px;
+    background-color: white;
+    opacity: 0;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.08);
+    -webkit-transition: all 0.2s ease;
+}
+
+.switch:checked ~ label:after {
+    opacity: 1;
+}
+
+.switch:checked ~ label:before {
+    opacity: 0;
+}
+
+.switch:checked ~ label {
+    background-color: green;
+}
+a:focus{
+    outline: none;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.button:hover {
+    background-color: #6ECF72;
+}
+.button:active {
+    background-color: #000000;
+}
