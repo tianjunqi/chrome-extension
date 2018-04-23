@@ -34,7 +34,7 @@
     {
       "all_frames": true,
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["js/jquery.min.js", "js/injectscript.js"]
+      "js": ["js/injectscript.js"]
     }
   ],
   "permissions": [
