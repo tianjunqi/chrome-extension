@@ -59,7 +59,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
             var imgdata= "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQImWP4DwQACfsD/eNV8pwAAAAASUVORK5CYII=";
             return { redirectUrl: imgdata };
         }
-        console.log(details);
+        //console.log(details);
         //console.log(details.requestBody);
         if(disable_xmlhttprequest === "YES" && details.type==="xmlhttprequest") {
             return { redirectUrl: "data:text/html;" };
@@ -71,3 +71,14 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 chrome.browserAction.onClicked.addListener(function(){
     chrome.tabs.create({ url: 'options.html' });
 });
+chrome.webRequest.onCompleted.addListener(function (details){
+    if (details.type==="xmlhttprequest"){
+        chrome.tabs.executeScript(null, {file: "js/injectscript.js", allFrames: true});
+    }
+},{urls: ["<all_urls>"]},["responseHeaders"]);
+/*
+chrome.webRequest.onResponseStarted.addListener(function (details){
+    console.log("=======    ");
+},{urls: ["<all_urls>"]},["responseHeaders"]);
+*/
+
