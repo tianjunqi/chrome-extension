@@ -87,12 +87,14 @@
                         <div>
                             <h3>README:</h3>
                             每行一个（One line per line）.<br>
-                                url`type$strReg~.....<br>
+                                url`type$strReg~.....`outTime<br>
                                 其中`$~为插件预留字符,不能在后续使用.<br>
                                 url 为要过滤的页面url path or domain信息，也可以使用*匹配所有页面，支持使用正册
                                 <br>
                                 type 为替换的内容类型（obj、text、textad）；
                                 obj为页面dom对象，text为页面html内容<br>
+                                <br>
+                                outTime 延迟执行毫秒
                                 <br>
                                 type 为text时; <br>
                             一种为常规模式，strReg 为要被拦截的内容，当type为obj时只能使用class=xxx或id=xxx；可使用正册匹配页面内容
@@ -109,6 +111,15 @@
                             <br>
                             xxxxxxx为要查找的字符，^字符前后匹配的标签
                             -->
+
+                            <br><br>
+                                第三种模式为：class=xxx&tagName=xxx&textContent=xxx&parent=2<br>
+                                class=xxx查找对象className，也也可以使用id=xxx代替<br>
+                                tagName=xxx要查找的标签tagName，例如：tagName=span<br>
+                                textContent=xxx要查找标签中包括的内容，例如：textContent=广告
+                            <br>
+                            parent=2，根据上面获取到的对象，再继续往上获取父对象，例如parent=2，为获取父级的父级对象。
+
                             </p>
                         </div>
                     </div>
