@@ -24,7 +24,14 @@ function filterContent(){
                             re = true;
                         }
                         if(re){
-                            pageTagContentRemove(temArr[1], null);
+
+                            var outtimenum = temArr[2] ? parseInt(temArr[2]) : 0;
+                            if(outtimenum){
+                                window.setTimeout("pageTagContentRemove('"+temArr[1]+"', "+null+")", outtimenum);
+                            }else{
+                                pageTagContentRemove(temArr[1], null);
+                            }
+
                         }
                         /*
                         var domReg = new RegExp(arrContent[i],'i');
@@ -95,8 +102,15 @@ function pageTagContentRemove(lstr, parobj) {
             }
             thobj = parobj;
         }
+        if(thtemarr[0] === "comad"){
+            //comseaobj(thtemarr);
+            //window.setTimeout("comseaobj('"+temstr+"')", outtimenum);
+            comseaobj(temstr)
+            return;
+        }
         if(thtemarr[0] === "text" && thtemarr.length>3){
             // console.log("aa--11");
+
             return textFiter(thtemarr);
         }
         if(thtemarr[0] === "textad"){
@@ -153,6 +167,7 @@ function textFiter(thtemarr){
         var arrMat = stext.match(tReg);
         if (arrMat) {
             var tmarr = arrMat[0].split("=");
+            //console.log(tmarr);
             var tgname = tmarr[1].replace(/\"/g, "");
             if (tmarr[0].toLocaleLowerCase() === "id") {
                 removeNode(document.getElementById(tgname));
@@ -184,23 +199,99 @@ function textAdFiter(thtemarr) {
         if (stnum < 0) {
             break;
         }
-        //console.log(stnum);
-
         var qzNum = subMatchTag(preArr, stnum, false);
         var hzNum = subMatchTag(sufArr, stnum, true);
-        //console.log(qzNum)
-        //console.log(hzNum);
-        //console.log("---")
         if(qzNum>0 && qzNum>0){
-            //console.log(qzNum + "   "+ qzNum);
             var mhText = htmlText.substring(qzNum,hzNum);
-            //console.log(mhText);
             document.getElementsByTagName('html')[0].innerHTML = htmlText.replace(mhText,"");
         }
 
     }while (true);
 
 }
+
+function comseaobj(thtemstr){
+    var thtemarr = thtemstr.split("$");
+    var sObj=[];
+    var arrSelStr = thtemarr[1].split("&");
+    var s_tagname=null,s_textcontent=null,s_parent=null;
+
+    for (var i=0;i<arrSelStr.length;i++) {
+        var tema = arrSelStr[i].split("=");
+        var skname = tema[0].toLocaleLowerCase();
+        var skvalue = tema[1];
+        if( skname === "class"){
+            sObj = getElementsByClassName(skvalue);
+            if(!sObj){
+                return;
+            }
+            continue;
+        }else if( skname === "id"){
+            sObj[0] = document.getElementById(skvalue);
+            if(!sObj[0]){
+                return;
+            }
+            continue;
+        }
+        if(skname !== "tagname" && skname !== "textcontent" && skname !== "parent"){
+            return;
+        }
+        if (skname === "tagname"){
+            s_tagname = skvalue;
+        }else if(skname === "textcontent"){
+            s_textcontent = skvalue;
+        }else if(skname === "parent"){
+            s_parent = skvalue;
+        }
+
+
+    }
+
+    if (!sObj||s_parent==null||(s_tagname==null&&s_textcontent==null)) {
+        return;
+    }
+
+    var s0=false;
+    for (var u=0;u<sObj.length;u++){
+        var onObj = sObj[u];
+        if(s_tagname){
+            s0 = true;
+            if(onObj.tagName !== s_tagname.toLocaleUpperCase()){
+                continue;
+            }
+        }
+        if(s_textcontent){
+            s0 = true;
+            if(onObj.textContent !== s_textcontent)
+            {
+                continue;
+            }
+        }
+        if(!s0){
+            return;
+        }
+
+        var pint = parseInt(s_parent);
+        if (pint === 0) {
+            removeNode(onObj);
+        } else if (pint > 0) {
+            var ssObj = onObj;
+            for (; pint > 0; pint--) {
+                if (!ssObj.parentElement) {
+                    return;
+                }
+                ssObj = ssObj.parentElement;
+            }
+            if (ssObj) {
+                removeNode(ssObj);
+            }
+        } else {
+            return;
+        }
+
+    }
+}
+
 function subMatchTag(tagArr, sxtnum, hz){
     var htmlText = document.getElementsByTagName('html')[0].innerHTML;
     for (var i0=0;i0<tagArr.length;i0++){
@@ -240,4 +331,4 @@ function subMatchTag(tagArr, sxtnum, hz){
  strReg obj = tagName,class=name or id=name
  strReg text = start text ..... end text
  */
-window.setTimeout("filterContent()", 300);
+filterContent();
