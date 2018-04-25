@@ -92,6 +92,17 @@ function restore_options() {
         $("#contentfilter_switch").attr("checked", false);
     }
 
+    //copy_switch
+    var copy_sw = localStorage["copy_switch"];
+    if (copy_sw !== "YES") {
+        copy_sw = "NO";
+    }
+    $("label[for=copy_switch]").attr("data-sw", copy_sw);
+    if(copy_sw === "YES"){
+        $("#copy_switch").attr("checked", true);
+    }else{
+        $("#copy_switch").attr("checked", false);
+    }
 
 
 }
@@ -179,6 +190,12 @@ $(document).ready(function(){
                 chrome.storage.local.set({"contentfilter_switch": swst}, function() {
                     console.log("local.set contentfilter_switch : "+ swst);
                 });
+                break;
+            case "copy_switch":
+                chrome.storage.local.set({"copy_switch": swst}, function() {
+                    console.log("local.set copy_switch : "+ swst);
+                });
         }
     });
+    $("#depth_option_box").show(100);
 });

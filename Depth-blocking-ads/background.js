@@ -52,16 +52,19 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
     if(mak === 1) {
         return {};
     }else if(mak === 2){
+        console.log("blocking-ad-url: ", details.url);
         return {cancel: true};
     }else if(mak === 0) {
         if(disable_image === "YES" && details.type === "image"){
             // return { redirectUrl: newUrl };
+            console.log("blocking-ad-image: ", details.url);
             var imgdata= "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQImWP4DwQACfsD/eNV8pwAAAAASUVORK5CYII=";
             return { redirectUrl: imgdata };
         }
         //console.log(details);
         //console.log(details.requestBody);
         if(disable_xmlhttprequest === "YES" && details.type==="xmlhttprequest") {
+            console.log("blocking-ad-xhr: ", details.url);
             return { redirectUrl: "data:text/html;" };
         }
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title> Setting depth-blocking-ads</title>
@@ -7,9 +7,9 @@
     <link href="options.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1> Setting Depth-blocking-ads</h1>
+<h1> Setting Depth-blocking-ads<a href="https://github.com/tianjunqi/chrome-extension/tree/master/Depth-blocking-ads" target="_blank" style="float: right;font-size: 14px">github</a></h1>
 
-    <div>
+    <div id="depth_option_box" style="display: none">
         <table width="100%">
             <tr>
                 <td colspan="10" bgcolor="#fdf5e6">
@@ -23,6 +23,7 @@
                                 <label for="blocking_switch"></label>
                             </div>
                         </dd>
+
                         <dd>
                             <div class="swtit">Disable xmlHttpRequest</div>
                             <div class="switch-container">
@@ -42,12 +43,21 @@
                         </dd>
 
                         <dd>
+                            <div class="swtit">Enable Copy</div>
+                            <div class="switch-container">
+                                <input id="copy_switch" type="checkbox" class="switch" />
+                                <label for="copy_switch"></label>
+                            </div>
+                        </dd>
+
+                        <dd>
                             <div class="swtit">Enable Content filtering</div>
                             <div class="switch-container">
                                 <input id="contentfilter_switch" type="checkbox" class="switch" />
                                 <label for="contentfilter_switch"></label>
                             </div>
                         </dd>
+
                     </dl>
 
                 </td>
