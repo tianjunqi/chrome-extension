@@ -170,11 +170,11 @@ function iframeFiter(thtemarr) {
     }
     //
     //匹配域名`iframe$匹配的内容`延时执行时间毫秒
-    //例：*`iframe$<title>广告推广</title>`100
+    //例：*`iframe$<title>网盟推广</title>`100
     var searchTagName = thtemarr[1];
     var htmlText = document.getElementsByTagName('html')[0].innerHTML;
     var stnum = htmlText.indexOf(searchTagName);
-    if(stnum) {
+    if(stnum>0) {
         document.body.innerHTML="";
     }
 
