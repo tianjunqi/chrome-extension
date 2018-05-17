@@ -32,7 +32,7 @@ function searchMatchUrl(url) {
     if(!arrMat) {
         return 0;
     }
-    console.log(arrMat);
+    //console.log(arrMat);
     if(arrMat[2] === "localhost" || arrMat[1] === "chrome-extension" || arrMat[1] === "data"){
         return 1;
     }
