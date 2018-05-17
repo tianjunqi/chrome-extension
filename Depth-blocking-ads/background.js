@@ -32,11 +32,20 @@ function searchMatchUrl(url) {
     if(!arrMat) {
         return 0;
     }
+    console.log(arrMat);
     if(arrMat[2] === "localhost" || arrMat[1] === "chrome-extension" || arrMat[1] === "data"){
         return 1;
     }
+
     for (var i = 0; i < arrDataList.length; i++) {
-        var domReg = new RegExp(arrDataList[i],'i');
+        var tmpData = arrDataList[i];
+        if(tmpData.substring(0,6) === 'query:') {
+            tmpData = tmpData.substring(6);
+            if(url.indexOf(tmpData) > 0 ){
+                return 2;
+            }
+        }
+        var domReg = new RegExp(tmpData,'i');
         if (domReg.test(arrMat[0]) || domReg.test(arrMat[1]) || domReg.test(arrMat[2])) {
             return 2;
         }

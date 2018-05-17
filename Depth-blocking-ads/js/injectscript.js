@@ -9,6 +9,7 @@ function filterContent(){
         (function() { function R(a){ona = "on"+a; if(window.addEventListener) window.addEventListener(a, function (e) { for(var n=e.originalTarget; n; n=n.parentNode) n[ona]=null; }, true); window[ona]=null; document[ona]=null; if(document.body) document.body[ona]=null; } R("contextmenu"); R("click"); R("mousedown"); R("mouseup"); R("selectstart");})()
 
     });
+
     chrome.storage.local.get(["contentfilter_switch"], function(result) {
         var switchv = result.contentfilter_switch;
         if(switchv !== "YES") {
@@ -129,6 +130,9 @@ function pageTagContentRemove(lstr) {
 
             return textFiter(thtemarr);
         }
+        if(thtemarr[0] === "iframe") {
+            return iframeFiter(thtemarr);
+        }
         if(thtemarr[0] === "textad"){
             //return textAdFiter(thtemarr);
         }
@@ -160,7 +164,21 @@ function pageTagContentRemove(lstr) {
         }
     }
 }
+function iframeFiter(thtemarr) {
+    if (self === top) {
+        return false;
+    }
+    //
+    //匹配域名`iframe$匹配的内容`延时执行时间毫秒
+    //例：*`iframe$<title>广告推广</title>`100
+    var searchTagName = thtemarr[1];
+    var htmlText = document.getElementsByTagName('html')[0].innerHTML;
+    var stnum = htmlText.indexOf(searchTagName);
+    if(stnum) {
+        document.body.innerHTML="";
+    }
 
+}
 function textFiter(thtemarr){
     // console.log(thtemarr);
     var stnum = 0, stnum2 = 0;
